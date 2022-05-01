@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -a
+
+HOME_DIR="$HOME"
+RANGE_DIR="$PWD"
+
+PLUGIN_DIR="$HOME_DIR/projects/carthage-plugins"
+CARTHAGE_AWS="$RANGE_DIR/carthage_aws"
+CARTHAGE_DIR="$HOME_DIR/projects/carthage"
+
+PYTHONPATH="$CARTHAGE_DIR":"$RANGE_DIR/python":"$CARTHAGE_AWS"
+
+CARTHAGE_RUNNER="$CARTHAGE_DIR/bin/carthage-runner"
+CARTHAGE_CONSOLE="$CARTHAGE_DIR/bin/carthage-console"
+
+case $1 in
+    start)
+        $CARTHAGE_RUNNER --no-tmux --generate --start --keep --config config.yml
+    ;;
+    generate)
+        $CARTHAGE_RUNNER --no-tmux --generate --config config.yml
+    ;;
+    debug)
+        pdb3 $CARTHAGE_RUNNER --no-tmux --generate --start --keep --config config.yml
+    ;;
+    verbose)
+        $CARTHAGE_RUNNER --no-tmux --generate --start --keep --config config.yml --tasks-verbose
+    ;;
+    *)
+        echo -e "\nHELP:\n\nbash run <start|generate|debug|verbose>\n"
+    ;;
+esac

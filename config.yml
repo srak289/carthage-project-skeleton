@@ -1,0 +1,13 @@
+plugins:
+  - carthage_aws
+  - .
+layout_name: name_of_layout
+authorized_keys: ${HOME}/.ssh/id_rsa.pub
+production_ssh_agent: True
+base_dir: ${HOME}/projects/name-of-layout
+aws:
+  access_key_id: ''
+  secret_access_key: ''
+  region: ''
+  vpc_name: ''
+  vpc_id: ''
